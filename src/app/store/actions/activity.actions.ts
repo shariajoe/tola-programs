@@ -14,7 +14,8 @@ export enum ActivityActionTypes {
   DeleteActivities = '[Activity] Delete Activities',
   ClearActivities = '[Activity] Clear Activities',
   AllActivitiesRequested = '[Activity] All Activities Requested',
-  AllActivitiesLoaded = '[Activity] All Activities Loaded' 
+  AllActivitiesLoaded = '[Activity] All Activities Loaded',
+  ActivitySaved = '[Edit Activity Dialog] Activity Saved',
 }
 
 export class LoadActivities implements Action {
@@ -89,6 +90,13 @@ export class AllActivitiesLoaded implements Action {
 
 }
 
+export class ActivitySaved implements Action {
+
+  readonly type = ActivityActionTypes.ActivitySaved;
+
+  constructor(public payload: { activity: Update<Activity> }) {}
+}
+
 export type ActivityActions =
  LoadActivities
  | AddActivity
@@ -101,4 +109,5 @@ export type ActivityActions =
  | DeleteActivities
  | ClearActivities
  | AllActivitiesRequested
- | AllActivitiesLoaded;
+ | AllActivitiesLoaded
+ | ActivitySaved;

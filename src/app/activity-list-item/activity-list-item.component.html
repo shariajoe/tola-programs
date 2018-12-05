@@ -1,13 +1,13 @@
 <mat-list *ngIf="activities.length">
 	<div *ngFor="let activity of activities">
-		<mat-list-item class="activity-item" [routerLink]="['/activities', activity.id]">
+		<mat-list-item class="activity-item">
 		  
 
 	      <h4 matLine>{{activity.name}}</h4>
 	      <p matLine class="activity-item-desc">Start date: {{ getFormattedDateForUrl(activity.expected_start_date) }}</p>
 	      <p matLine class="activity-item-desc">End date: {{ getFormattedDateForUrl(activity.expected_end_date) }}</p>
 	      
-	      <button mat-icon-button [routerLink]="['/activities', activity.id]">
+	      <button mat-icon-button (click)="editActivity(activity)">
 	        <mat-icon matListIcon>edit</mat-icon>
 	      </button>
 	      <button mat-icon-button [routerLink]="['/activities', activity.id]">
