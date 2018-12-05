@@ -1,0 +1,33 @@
+.activity-card {
+    margin: 20px 10px;
+}
+
+.activity-item {
+    font-family: 'Montserrat';   
+}
+
+.activity-item-desc{
+    color: #808080;
+    font-size: 12px;
+}
+
+:host /deep/ .mat-list-item-content {
+  padding: 0!important;
+}
+
+.activity-status{
+   display: flex; 
+   align-items: center;
+   flex-direction: column
+}
+
+.activity-status-indicator{
+	height: 15px; 
+	width: 15px;
+	border-radius: 50%;
+}
+
+.activity-status-text{
+    font-size: 11px;
+}
+
