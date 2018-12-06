@@ -2,6 +2,10 @@ import { Component, OnInit, Input, ViewEncapsulation} from '@angular/core';
 import {Activity} from "../store/models/activity.model";
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {ActivityDialogComponent} from "../activity-dialog/activity-dialog.component";
+import {ActivitiesService} from "../store/services/activities.service";
+import {State} from "../store/reducers";
+import {Store} from "@ngrx/store";
+import {DeleteActivity} from '../store/actions/activity.actions';
 
 @Component({
   selector: 'activity-list-item',
@@ -13,7 +17,8 @@ export class ActivityListItemComponent implements OnInit {
   @Input()
   activities: Activity[];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private store: Store<State>,
+        private activitiesService: ActivitiesService,) {
   }
 
   ngOnInit() {
@@ -21,17 +26,17 @@ export class ActivityListItemComponent implements OnInit {
   }
 
 
-  getFormattedDateForUrl(date_created) {
-	  let date = new Date(date_created);
-	  let year = date.getFullYear();
-	  let month = (1 + date.getMonth()).toString();
-	  month = month.length > 1 ? month : '0' + month;
-	  let day = date.getDate().toString();
-	  day = day.length > 1 ? day : '0' + day;
-	  return day +'-'+ month +'-'+year;
-  }
+	getFormattedDateForUrl(date_created) {
+	    let date = new Date(date_created);
+		let year = date.getFullYear();
+		let month = (1 + date.getMonth()).toString();
+		month = month.length > 1 ? month : '0' + month;
+		let day = date.getDate().toString();
+		day = day.length > 1 ? day : '0' + day;
+		return day +'-'+ month +'-'+year;
+	}
 
-  editActivity(activity:Activity) {
+    editActivity(activity:Activity) {
 
         const dialogConfig = new MatDialogConfig();
 
@@ -45,6 +50,17 @@ export class ActivityListItemComponent implements OnInit {
             dialogConfig);
 
 
+    }
+
+    deleteActivity(activity:Activity){
+        this.activitiesService
+            .deleteActivity(activity.id)
+            .subscribe(
+                () => {
+                    let activityId = ""+activity.id;
+                    this.store.dispatch(new DeleteActivity({id: activityId}));
+                }
+            );
     }
 
 }

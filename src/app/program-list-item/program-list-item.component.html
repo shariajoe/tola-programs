@@ -1,13 +1,13 @@
 <mat-list>
 	<div *ngFor="let program of programs">
 		<mat-list-item class="program-item" [routerLink]="['/activities', program.name, program.id]">
-		  <div class="program-status">
-			  <div class="program-status-indicator" [style.background-color]="program.status === 'green'?program.status:'red'"></div>
-			  <div class="program-status-text">{{program.status === 'green'?'Active':'Inactive'}}</div>
+		  <div class="program-item__status">
+			  <div class="program-item__status__indicator" [style.background-color]="program.status === 'green'?program.status:'red'"></div>
+			  <div class="program-item__status__text">{{program.status === 'green'?'Active':'Inactive'}}</div>
 		  </div>
 
 	      <h4 matLine>{{program.name}}</h4>
-	      <p matLine class="program-item-desc">{{ stripTags(program.description) }}</p>
+	      <p matLine class="program-item__desc">{{ stripTags(program.description) }}</p>
 	      
 	      <button mat-icon-button [routerLink]="['/activities', program.name, program.id]">
 	        <mat-icon matListIcon>keyboard_arrow_right</mat-icon>

@@ -5,13 +5,6 @@ import * as fromActivity from '../reducers/activity.reducer';
 
 export const selectActivitiesState = createFeatureSelector<activitiesState>("activities");
 
-
-export const selectActivityById = (activityId:number) => createSelector(
-  selectActivitiesState,
-  activityState => activityState.entities[activityId]
-);
-
-
 export const selectAllActivities = createSelector(
   selectActivitiesState,
   fromActivity.selectAll

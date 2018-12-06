@@ -16,10 +16,11 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { MatListModule, MatSidenavModule, MatToolbarModule, MatDatepickerModule, MatDialogModule, MatInputModule } from "@angular/material";
+import { MatListModule, MatSidenavModule, MatToolbarModule, MatDialogModule, MatInputModule, 
+  MatDatepickerModule, MatNativeDateModule, DateAdapter, MAT_DATE_FORMATS } from "@angular/material";
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from "@angular/material/card";
-import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 import { EffectsModule } from '@ngrx/effects';
 
@@ -39,6 +40,20 @@ import { ActivityListItemComponent } from './activity-list-item/activity-list-it
 import { ActivityDialogComponent } from './activity-dialog/activity-dialog.component';
 
 import { ReactiveFormsModule } from "@angular/forms";
+
+import { DateFormat } from './date-format';
+
+const MY_DATE_FORMATS = {
+   parse: {
+      dateInput: {month: 'short', year: 'numeric', day: 'numeric'}
+   },
+   display: {
+      dateInput: 'input',
+      monthYearLabel: {year: 'numeric', month: 'short'},
+      dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+      monthYearA11yLabel: {year: 'numeric', month: 'long'},
+   }
+};
 
 
 @NgModule({
@@ -63,6 +78,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatButtonModule,
     HttpClientModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatMomentDateModule,
     MatDialogModule,
     MatInputModule,
@@ -72,7 +88,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     EffectsModule.forRoot([ProgramsEffects, ActivityEffects]),
     StoreRouterConnectingModule.forRoot({stateKey:'router'})
   ],
-  providers: [ProgramsService, ActivitiesService],
+  providers: [ProgramsService, ActivitiesService,{ provide: DateAdapter, useClass: DateFormat },
+  { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
   entryComponents: [ActivityDialogComponent],
   bootstrap: [AppComponent]
 })

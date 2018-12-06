@@ -7,7 +7,8 @@ import {ActivitiesService} from "../store/services/activities.service";
 import {State} from "../store/reducers";
 import {Store} from "@ngrx/store";
 import {Update} from "@ngrx/entity";
-import {ActivitySaved} from '../store/actions/activity.actions';
+import {UpdateActivity} from '../store/actions/activity.actions';
+import {AddActivity} from '../store/actions/activity.actions';
 
 @Component({
     selector: 'activity-dialog',
@@ -20,8 +21,11 @@ export class ActivityDialogComponent implements OnInit {
 
     form: FormGroup;
     name: string;
-    startDate: string;
-    endDate: string;
+    expected_start_date: string;
+    expected_end_date: string;
+    showAdd: boolean = false;
+    startDate = new Date();
+    endDate = new Date();
 
     constructor(
         private store: Store<State>,
@@ -30,20 +34,34 @@ export class ActivityDialogComponent implements OnInit {
         private dialogRef: MatDialogRef<ActivityDialogComponent>,
         @Inject(MAT_DIALOG_DATA) activity:Activity ) {
 
-        this.activityId = activity.id;
+    	if(activity && activity != null && activity.hasOwnProperty('id')){
 
-        this.name = activity.name;
+	        this.activityId = activity.id;
 
-        this.startDate = activity.expected_start_date;
+	        this.name = activity.name;
 
-        this.endDate = activity.expected_end_date;
+	        this.expected_start_date = activity.expected_start_date;
 
+	        this.expected_end_date = activity.expected_end_date;
 
-        this.form = fb.group({
-            name: [activity.name, Validators.required],
-            startDate: [activity.expected_start_date, Validators.required],
-            endDate: [activity.expected_end_date,Validators.required]
-        });
+	        this.startDate = new Date(this.expected_start_date);
+
+	        console.log(this.startDate);
+            this.endDate = new Date(this.expected_end_date);
+
+	        this.form = fb.group({
+	            name: [activity.name, Validators.required],
+	            expected_start_date: [activity.expected_start_date, Validators.required],
+	            expected_end_date: [activity.expected_end_date,Validators.required]
+	        });
+	    }else{
+	    	this.showAdd = true;
+	    	this.form = fb.group({
+	            name: ["", Validators.required],
+	            expected_start_date: ["", Validators.required],
+	            expected_end_date: ["",Validators.required]
+	        });
+	    }
 
     }
 
@@ -53,11 +71,20 @@ export class ActivityDialogComponent implements OnInit {
 
 
     save() {
-        const changes = this.form.value;
+        const formValues = this.form.value;
 
-        changes['id'] = this.activityId;
+        const url = window.location.href;
 
-        changes['workflowlevel1'] = "https://dev-api.toladata.io/api/workflowlevel1/551/";
+        const workflowlevel1 = url.split('/').pop();
+
+        let changes = {...formValues};
+
+       // changes['id'] = this.activityId;
+
+        changes['expected_start_date'] = moment(formValues.expected_start_date).format();
+        changes['expected_end_date'] = moment(formValues.expected_end_date).format();
+
+        changes['workflowlevel1'] = `https://dev-api.toladata.io/api/workflowlevel1/${workflowlevel1}/`;
 
         this.activitiesService
             .saveActivity(this.activityId, changes)
@@ -69,7 +96,36 @@ export class ActivityDialogComponent implements OnInit {
                       changes
                     };
 
-                    this.store.dispatch(new ActivitySaved({activity}));
+                    this.store.dispatch(new UpdateActivity({activity}));
+
+                    this.dialogRef.close();
+                }
+            );
+    }
+
+
+    add() {
+        const formValues = this.form.value;
+
+        const url = window.location.href;
+
+        const workflowlevel1 = url.split('/').pop();
+
+        let changes = {...formValues};
+
+        changes['expected_start_date'] = moment(formValues.expected_start_date).format();
+        changes['expected_end_date'] = moment(formValues.expected_end_date).format();
+
+        changes['workflowlevel1'] = `https://dev-api.toladata.io/api/workflowlevel1/${workflowlevel1}/`;
+
+        this.activitiesService
+            .addActivity(this.activityId, changes)
+            .subscribe(
+                (response) => {
+
+                    let activity = <Activity>response;
+
+                    this.store.dispatch(new AddActivity({activity}));
 
                     this.dialogRef.close();
                 }

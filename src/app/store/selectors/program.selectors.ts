@@ -5,13 +5,6 @@ import * as fromProgram from '../reducers/program.reducer';
 
 export const selectProgramsState = createFeatureSelector<ProgramState>("programs");
 
-
-export const selectCourseById = (programId:number) => createSelector(
-  selectProgramsState,
-  programState => programState.entities[programId]
-);
-
-
 export const selectAllPrograms = createSelector(
   selectProgramsState,
   fromProgram.selectAll

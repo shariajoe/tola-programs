@@ -1,11 +1,17 @@
 <div class="activities-panel">
-    <h3 class="title">{{name}} - Activities</h3>
-
+	<div class="activities-panel__top-div">
+	    <div class="activities-panel__top-div__title-div">
+	    	<h3 class="activities-panel__top-div__title-div__title">{{name}} - Activities</h3>
+	    </div>
+	    <div class="activities-panel__top-div__button-div" (click)="addActivity()">
+		    <button mat-fab color="primary">   
+		        <mat-icon>add</mat-icon>
+		    </button>
+		</div>
+	</div>
     <activity-list-item
       [activities]="programActivities$ | async">
     </activity-list-item>
 
-    <button mat-fab color="primary" class="bottom-right">   
-        <mat-icon>add</mat-icon>
-    </button>
+    
 </div>

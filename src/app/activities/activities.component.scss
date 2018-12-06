@@ -1,15 +1,27 @@
 .activities-panel {
     max-width: 600px;
-    margin: 200px auto;
+    margin: 250px auto;
     padding: 30px 20px 20px 20px;
 }
 
-.title{
-	padding-left: 30px;
+.activities-panel__top-div{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
-.bottom-right{
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
+.activities-panel__top-div__title-div{
+	flex: 3;
+}
+
+.activities-panel__top-div__title-div__title{
+	padding-left: 20px;
+}
+
+.activities-panel__top-div__button-div{
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: flex-end
 }

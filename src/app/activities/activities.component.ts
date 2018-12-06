@@ -7,7 +7,8 @@ import {State} from '../store/reducers/';
 import {select, Store} from '@ngrx/store';
 import { selectAllActivities, selectProgramActivities } from '../store/selectors/activity.selectors';
 import {AllActivitiesRequested} from '../store/actions/activity.actions';
-
+import {MatDialog, MatDialogConfig} from "@angular/material";
+import {ActivityDialogComponent} from "../activity-dialog/activity-dialog.component";
 
 @Component({
   selector: 'app-activities',
@@ -22,7 +23,9 @@ export class ActivitiesComponent  implements OnInit, OnDestroy {
 
   programActivities$: Observable<Activity[]>;
 
-  constructor(private route: ActivatedRoute, private store: Store<State>) { 
+  workflowlevel1$: number;
+
+  constructor(private route: ActivatedRoute, private store: Store<State>, private dialog: MatDialog) { 
 
   }
 
@@ -42,5 +45,19 @@ export class ActivitiesComponent  implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+    addActivity() {
+
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '400px';
+
+        const dialogRef = this.dialog.open(ActivityDialogComponent,
+            dialogConfig);
+
+
+    }
 
 }

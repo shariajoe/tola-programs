@@ -9,13 +9,13 @@ export interface activitiesState extends EntityState<Activity> {
 
 export const adapter: EntityAdapter<Activity> = createEntityAdapter<Activity>();
 
-export const initialActivitiestate: activitiesState = adapter.getInitialState({
+export const initialActivityState: activitiesState = adapter.getInitialState({
   // additional entity state properties
   allActivitiesLoaded: false
 });
 
 export function activityReducer(
-  state = initialActivitiestate,
+  state = initialActivityState,
   action: ActivityActions
 ): activitiesState {
   switch (action.type) {
@@ -47,20 +47,12 @@ export function activityReducer(
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case ActivityActionTypes.DeleteActivities: {
-      return adapter.removeMany(action.payload.ids, state);
-    }
-
     case ActivityActionTypes.LoadActivities: {
       return adapter.addAll(action.payload.activities, state);
     }
 
     case ActivityActionTypes.AllActivitiesLoaded: {
       return adapter.addAll(action.payload.activities, {...state, allActivitiesLoaded:true});
-    }
-
-    case ActivityActionTypes.ClearActivities: {
-      return adapter.removeAll(state);
     }
 
     default: {
