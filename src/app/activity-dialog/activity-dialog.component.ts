@@ -79,8 +79,6 @@ export class ActivityDialogComponent implements OnInit {
 
         let changes = {...formValues};
 
-       // changes['id'] = this.activityId;
-
         changes['expected_start_date'] = moment(formValues.expected_start_date).format();
         changes['expected_end_date'] = moment(formValues.expected_end_date).format();
 
