@@ -42,6 +42,7 @@ import { ActivityDialogComponent } from './activity-dialog/activity-dialog.compo
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { DateFormat } from './date-format';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const MY_DATE_FORMATS = {
    parse: {
@@ -86,7 +87,8 @@ const MY_DATE_FORMATS = {
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([ProgramsEffects, ActivityEffects]),
-    StoreRouterConnectingModule.forRoot({stateKey:'router'})
+    StoreRouterConnectingModule.forRoot({stateKey:'router'}),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ProgramsService, ActivitiesService,{ provide: DateAdapter, useClass: DateFormat },
   { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
