@@ -15,4 +15,23 @@
   padding: 0!important;
 }
 
+.sorry-div{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.sorry-div__icon{
+	height: 80px; 
+	width: 80px;
+	font-size: 80px;
+	color: #808080;
+	margin: 0 auto;
+}
+
+.sorry-div__text{
+	color: #808080;
+	text-align: center;
+}
+
 

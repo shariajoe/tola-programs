@@ -18,7 +18,7 @@
 	</div>
 </mat-list>
 
-<div style="display:flex;justify-content: center;flex-direction: column;"  *ngIf="!activities.length">
-	<mat-icon matListIcon  style="height: 80px; width: 80px;font-size: 80px;color:#808080;margin: 0 auto;">sentiment_very_dissatisfied</mat-icon>
-	<h4 style="color:#808080;text-align: center">Sorry no activities found under this program</h4>
+<div class="sorry-div"  *ngIf="!activities.length">
+	<mat-icon matListIcon  class="sorry-div__icon">sentiment_very_dissatisfied</mat-icon>
+	<h4 class="sorry-div__text">Sorry no activities found under this program</h4>
 </div>
