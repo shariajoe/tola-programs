@@ -26,6 +26,10 @@ export class ActivityListItemComponent implements OnInit {
   }
 
 
+  /**
+  *   Function to format date
+  */
+
 	getFormattedDateForUrl(date_created) {
 	    let date = new Date(date_created);
 		let year = date.getFullYear();
@@ -35,6 +39,10 @@ export class ActivityListItemComponent implements OnInit {
 		day = day.length > 1 ? day : '0' + day;
 		return day +'-'+ month +'-'+year;
 	}
+
+    /**
+    *   Function to open activity dialog to edit
+    */
 
     editActivity(activity:Activity) {
 
@@ -51,6 +59,10 @@ export class ActivityListItemComponent implements OnInit {
 
 
     }
+
+    /**
+    *   Function to delete activity
+    */
 
     deleteActivity(activity:Activity){
         this.activitiesService

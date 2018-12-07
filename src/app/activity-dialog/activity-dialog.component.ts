@@ -26,6 +26,7 @@ export class ActivityDialogComponent implements OnInit {
     showAdd: boolean = false;
     startDate = new Date();
     endDate = new Date();
+    currentActivity: any;
 
     constructor(
         private store: Store<State>,
@@ -34,42 +35,43 @@ export class ActivityDialogComponent implements OnInit {
         private dialogRef: MatDialogRef<ActivityDialogComponent>,
         @Inject(MAT_DIALOG_DATA) activity:Activity ) {
 
-    	if(activity && activity != null && activity.hasOwnProperty('id')){
-
-	        this.activityId = activity.id;
-
-	        this.name = activity.name;
-
-	        this.expected_start_date = activity.expected_start_date;
-
-	        this.expected_end_date = activity.expected_end_date;
-
-	        this.startDate = new Date(this.expected_start_date);
-
-	        console.log(this.startDate);
-            this.endDate = new Date(this.expected_end_date);
-
-	        this.form = fb.group({
-	            name: [activity.name, Validators.required],
-	            expected_start_date: [activity.expected_start_date, Validators.required],
-	            expected_end_date: [activity.expected_end_date,Validators.required]
-	        });
-	    }else{
-	    	this.showAdd = true;
-	    	this.form = fb.group({
-	            name: ["", Validators.required],
-	            expected_start_date: ["", Validators.required],
-	            expected_end_date: ["",Validators.required]
-	        });
-	    }
+        this.currentActivity = activity;	
 
     }
 
     ngOnInit() {
+       if(this.currentActivity && this.currentActivity.hasOwnProperty('id')){
 
+            this.activityId = this.currentActivity.id;
+
+            this.name = this.currentActivity.name;
+
+            this.expected_start_date = this.currentActivity.expected_start_date;
+
+            this.expected_end_date = this.currentActivity.expected_end_date;
+
+            this.startDate = new Date(this.expected_start_date);
+
+            this.endDate = new Date(this.expected_end_date);
+
+            this.form = this.fb.group({
+                name: [this.currentActivity.name, Validators.required],
+                expected_start_date: [this.currentActivity.expected_start_date],
+                expected_end_date: [this.currentActivity.expected_end_date]
+            });
+        }else{
+            this.showAdd = true;
+            this.form = this.fb.group({
+                name: ["", Validators.required],
+                expected_start_date: [""],
+                expected_end_date: [""]
+            });
+        }
     }
 
-
+    /**
+    *   Function to save edit and update store
+    */
     save() {
         const formValues = this.form.value;
 
@@ -101,7 +103,9 @@ export class ActivityDialogComponent implements OnInit {
             );
     }
 
-
+    /**
+    *   Function to create activity and update store
+    */
     add() {
         const formValues = this.form.value;
 
@@ -130,6 +134,10 @@ export class ActivityDialogComponent implements OnInit {
             );
     }
 
+
+    /**
+    *   Function to close dialog
+    */
     close() {
         this.dialogRef.close();
     }
