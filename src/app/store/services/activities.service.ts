@@ -27,7 +27,7 @@ export class ActivitiesService {
         );
     }
 
-    addActivity(activityId: number, changes: Partial<Activity>) {
+    addActivity(changes: Partial<Activity>) {
         
         return this.http.post(`${AppConfig.baseUrl}/workflowlevel2/`, changes, { headers : this.headers});
     }

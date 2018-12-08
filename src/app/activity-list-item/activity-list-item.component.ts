@@ -65,14 +65,8 @@ export class ActivityListItemComponent implements OnInit {
     */
 
     deleteActivity(activity:Activity){
-        this.activitiesService
-            .deleteActivity(activity.id)
-            .subscribe(
-                () => {
-                    let activityId = ""+activity.id;
-                    this.store.dispatch(new DeleteActivity({id: activityId}));
-                }
-            );
+      let activityId = ""+activity.id;
+      this.store.dispatch(new DeleteActivity({id: activityId}));
     }
 
 }

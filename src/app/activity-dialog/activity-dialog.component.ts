@@ -120,18 +120,8 @@ export class ActivityDialogComponent implements OnInit {
 
         changes['workflowlevel1'] = `https://dev-api.toladata.io/api/workflowlevel1/${workflowlevel1}/`;
 
-        this.activitiesService
-            .addActivity(this.activityId, changes)
-            .subscribe(
-                (response) => {
-
-                    let activity = <Activity>response;
-
-                    this.store.dispatch(new AddActivity({activity}));
-
-                    this.dialogRef.close();
-                }
-            );
+        this.store.dispatch(new AddActivity(changes));
+        this.dialogRef.close();
     }
 
 

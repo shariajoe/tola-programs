@@ -19,31 +19,15 @@ export function activityReducer(
   action: ActivityActions
 ): activitiesState {
   switch (action.type) {
-    case ActivityActionTypes.AddActivity: {
+    case ActivityActionTypes.AddActivitySuccess: {
       return adapter.addOne(action.payload.activity, state);
-    }
-
-    case ActivityActionTypes.UpsertActivity: {
-      return adapter.upsertOne(action.payload.activity, state);
-    }
-
-    case ActivityActionTypes.AddActivities: {
-      return adapter.addMany(action.payload.activities, state);
-    }
-
-    case ActivityActionTypes.UpsertActivities: {
-      return adapter.upsertMany(action.payload.activities, state);
     }
 
     case ActivityActionTypes.UpdateActivity: {
       return adapter.updateOne(action.payload.activity, state);
     }
 
-    case ActivityActionTypes.UpdateActivities: {
-      return adapter.updateMany(action.payload.activities, state);
-    }
-
-    case ActivityActionTypes.DeleteActivity: {
+    case ActivityActionTypes.DeleteActivitySuccess: {
       return adapter.removeOne(action.payload.id, state);
     }
 
@@ -53,6 +37,14 @@ export function activityReducer(
 
     case ActivityActionTypes.AllActivitiesLoaded: {
       return adapter.addAll(action.payload.activities, {...state, allActivitiesLoaded:true});
+    }
+
+    case ActivityActionTypes.AddFailure: {
+      return state;
+    }
+
+    case ActivityActionTypes.DeleteActivityFailure: {
+      return state;
     }
 
     default: {
