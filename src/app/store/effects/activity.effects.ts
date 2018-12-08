@@ -9,7 +9,11 @@ import {
   AddActivitySuccess,
   DeleteActivity,
   DeleteActivityFailure,
-  DeleteActivitySuccess
+  DeleteActivitySuccess,
+  UpdateActivity,
+  UpdateActivitySuccess,
+  UpdateActivityFailure
+
 } from '../actions/activity.actions';
 import {throwError,of} from 'rxjs';
 import {catchError, concatMap, exhaustMap, filter, map, mergeMap, withLatestFrom, switchMap} from "rxjs/operators";
@@ -46,6 +50,24 @@ export class ActivityEffects {
             ),
             catchError(err =>
               of(new AddFailure({ any: err })),
+            ),
+          );
+      }),
+    );
+
+    @Effect() 
+    updateActivity$ = this.actions$
+      .ofType<UpdateActivity>(ActivityActionTypes.UpdateActivity)
+      .pipe(
+      switchMap((action: any) => {
+        return this.activitiesService.saveActivity(action.payload.activity.id, action.payload.activity.changes)
+          .pipe(
+            map(
+              (activity: any) =>
+                new UpdateActivitySuccess({ activity: activity }),
+            ),
+            catchError(err =>
+              of(new UpdateActivityFailure({ any: err })),
             ),
           );
       }),

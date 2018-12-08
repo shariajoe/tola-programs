@@ -5,9 +5,9 @@ import { Activity } from '../models/activity.model';
 export enum ActivityActionTypes {
   LoadActivities = '[Activity] Load Activities',
   AddActivity = '[Activity] Add Activity',
-  AddActivities = '[Activity] Add Activities',
   UpdateActivity = '[Activity] Update Activity',
-  UpdateActivities = '[Activity] Update Activities',
+  UpdateActivitySuccess = '[Activity] Update Activity Success',
+  UpdateActivityFailure = '[Activity] Update Activity Failure',
   DeleteActivity = '[Activity] Delete Activity',
   DeleteActivitySuccess = '[Activity] Delete Activity Success',
   DeleteActivityFailure = '[Activity] Delete Activity Failure',
@@ -35,23 +35,22 @@ export class AddActivitySuccess implements Action {
   constructor(public payload: { activity: Activity }) {}
 }
 
-
-export class AddActivities implements Action {
-  readonly type = ActivityActionTypes.AddActivities;
-
-  constructor(public payload: { activities: Activity[] }) {}
-}
-
 export class UpdateActivity implements Action {
   readonly type = ActivityActionTypes.UpdateActivity;
 
   constructor(public payload: { activity: Update<Activity> }) {}
 }
 
-export class UpdateActivities implements Action {
-  readonly type = ActivityActionTypes.UpdateActivities;
+export class UpdateActivitySuccess implements Action {
+  readonly type = ActivityActionTypes.UpdateActivitySuccess;
 
-  constructor(public payload: { activities: Update<Activity>[] }) {}
+  constructor(public payload: { activity: Update<Activity> }) {}
+}
+
+export class UpdateActivityFailure implements Action {
+  readonly type = ActivityActionTypes.UpdateActivityFailure;
+
+  constructor(public payload: { any }) {}
 }
 
 export class DeleteActivity implements Action {
@@ -71,7 +70,6 @@ export class DeleteActivityFailure implements Action {
 
   constructor(public payload: { any }) {}
 }
-
 
 export class AllActivitiesRequested implements Action {
 
@@ -96,13 +94,13 @@ export class AddFailure implements Action {
 export type ActivityActions =
  LoadActivities
  | AddActivity
- | AddActivities
  | UpdateActivity
- | UpdateActivities
  | DeleteActivity
  | AllActivitiesRequested
  | AllActivitiesLoaded
  | AddFailure
  | AddActivitySuccess
  | DeleteActivityFailure
- | DeleteActivitySuccess;
+ | DeleteActivitySuccess
+ | UpdateActivitySuccess
+ | UpdateActivityFailure;
