@@ -3,7 +3,7 @@ import {HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Activity} from "../models/activity.model";
 import {map} from "rxjs/operators";
-import AppConfig from "./config"
+import AppConfig from "./config";
 
 @Injectable()
 export class ActivitiesService {
@@ -20,9 +20,9 @@ export class ActivitiesService {
 
     findAllActivities(): Observable<Activity[]>  {
         
-        return this.http.get(`${AppConfig.baseUrl}/workflowlevel2/`, { headers : this.headers}).pipe(
+        return this.http.get<Activity[]>(`${AppConfig.baseUrl}/workflowlevel2/`, { headers : this.headers}).pipe(
             map(res =>{ 
-            	return <Activity[]>res;
+            	return res;
             })
         );
     }

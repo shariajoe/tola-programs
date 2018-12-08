@@ -19,7 +19,7 @@ export class ProgramsService {
     }
 
     findAllPrograms(): Observable<Program[]>  {
-        return this.http.get(`${AppConfig.baseUrl}/workflowlevel1/`, { headers : this.headers}).pipe(
+        return this.http.get<Program[]>(`${AppConfig.baseUrl}/workflowlevel1/`, { headers : this.headers}).pipe(
             map(res =>{ 
             	return <Program[]>res;
             })
