@@ -1,5 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {activitiesState} from '../reducers/activity.reducer';
+import AppConfig from "../services/config";
 
 import * as fromActivity from '../reducers/activity.reducer';
 
@@ -17,7 +18,7 @@ export const allActivitiesLoaded = createSelector(
 
 export const selectProgramActivities = (activityId:number) => createSelector(
   selectAllActivities,
-  activities => activities.filter(activity => activity.workflowlevel1 === `https://dev-api.toladata.io/api/workflowlevel1/${activityId}/`)
+  activities => activities.filter(activity => activity.workflowlevel1 === `${AppConfig.baseUrl}/workflowlevel1/${activityId}/`)
 );
 
 
