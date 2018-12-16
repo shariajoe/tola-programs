@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'TolaPrograms'`, () => {
+  it(`should have as title 'Tola Programs'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('TolaPrograms');
+    expect(app.title).toEqual('Tola Programs');
   });
 
   it('should render title in a h2 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h2').textContent).toContain('Welcome to Tola programs!');
+    expect(compiled.querySelector('h2').textContent).toContain('Welcome to Tola Programs!');
   });
 });

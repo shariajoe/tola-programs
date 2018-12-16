@@ -6,7 +6,7 @@ export class DateFormat extends NativeDateAdapter {
          const day = date.getDate();
          const month = date.getMonth() + 1;
          const year = date.getFullYear();
-         // Return the format as per your requirement
+         //format date to dd.mm.yyyy
          return this._to2digit(day) + '.' + this._to2digit(month) + '.' + year;
       } else {
         return date.toDateString();

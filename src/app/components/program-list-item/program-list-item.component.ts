@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Program} from "../store/models/program.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { Program } from "../../models/program.model";
 
 @Component({
     selector: 'program-list-item',
@@ -9,7 +9,7 @@ import {Program} from "../store/models/program.model";
 export class ProgramListItemComponent implements OnInit {
 
   @Input()
-  programs: Program[];
+  programs: Program[] = [];
 
   constructor() {
   }
@@ -17,9 +17,12 @@ export class ProgramListItemComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  
+  /**
+  * Function to Strip html tags from content 
+  */
   stripTags(content){
- 	    if(content){
+ 	  if(content){
 	   	let noTags = content.replace(/<[^>]*>/g, '');
 	   	return noTags;
     }

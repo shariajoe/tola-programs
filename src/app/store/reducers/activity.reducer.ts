@@ -1,5 +1,5 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Activity } from '../models/activity.model';
+import { Activity } from '../../models/activity.model';
 import { ActivityActions, ActivityActionTypes } from '../actions/activity.actions';
 
 export interface activitiesState extends EntityState<Activity> {

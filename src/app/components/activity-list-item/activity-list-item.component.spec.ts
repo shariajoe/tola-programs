@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatInputModule, MatListModule, MatDialogModule,
+  MatIconModule } from "@angular/material";
+import { StoreModule } from '@ngrx/store';
 import { ActivityListItemComponent } from './activity-list-item.component';
 
 describe('ActivityListItemComponent', () => {
@@ -8,7 +10,14 @@ describe('ActivityListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivityListItemComponent ]
+      declarations: [ ActivityListItemComponent ],
+      imports: [
+        MatListModule,
+        MatIconModule,
+        MatDialogModule, 
+        MatInputModule,
+        StoreModule.forRoot({})
+      ]
     })
     .compileComponents();
   }));

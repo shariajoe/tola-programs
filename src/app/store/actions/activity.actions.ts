@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Activity } from '../models/activity.model';
+import { Activity } from '../../models/activity.model';
 
 export enum ActivityActionTypes {
   LoadActivities = '[Activity] Load Activities',
@@ -74,7 +74,6 @@ export class DeleteActivityFailure implements Action {
 export class AllActivitiesRequested implements Action {
 
   readonly type = ActivityActionTypes.AllActivitiesRequested;
-
 }
 
 export class AllActivitiesLoaded implements Action {
@@ -82,11 +81,11 @@ export class AllActivitiesLoaded implements Action {
   readonly type = ActivityActionTypes.AllActivitiesLoaded;
 
   constructor(public payload: { activities: Activity[] }) {}
-
 }
 
 export class AddFailure implements Action {
   readonly type = ActivityActionTypes.AddFailure;
+
   constructor(public payload: any) {}
 }
 
