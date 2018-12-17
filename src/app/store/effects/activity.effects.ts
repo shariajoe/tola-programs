@@ -33,7 +33,7 @@ export class ActivityEffects {
               new fromActions.AddActivitySuccess({ activity: activity }),
           ),
           catchError(err =>
-            of(new fromActions.AddFailure({ any: err })),
+            of(new fromActions.AddActivityFailure({ err })),
           ),
         );
     }),
@@ -51,7 +51,7 @@ export class ActivityEffects {
               new fromActions.UpdateActivitySuccess({ activity: activity }),
           ),
           catchError(err =>
-            of(new fromActions.UpdateActivityFailure({ any: err })),
+            of(new fromActions.UpdateActivityFailure({ err })),
           ),
         );
     }),
@@ -69,7 +69,7 @@ export class ActivityEffects {
               new fromActions.DeleteActivitySuccess({id:action.payload.id})
           ),
           catchError(err =>
-            of(new fromActions.DeleteActivityFailure({ any: err })),
+            of(new fromActions.DeleteActivityFailure({ err })),
           ),
         );
     }),

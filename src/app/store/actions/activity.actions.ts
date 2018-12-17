@@ -4,21 +4,35 @@ import { Activity } from '../../models/activity.model';
 
 export enum ActivityActionTypes {
   LoadActivities = '[Activity] Load Activities',
+  AllActivitiesRequested = '[Activity] All Activities Requested',
+  AllActivitiesLoaded = '[Activity] All Activities Loaded',
+
   AddActivity = '[Activity] Add Activity',
+  AddActivityFailure = '[Activity] Add Failure',
+  AddActivitySuccess = '[Activity] Add Activity Success',
+
   UpdateActivity = '[Activity] Update Activity',
   UpdateActivitySuccess = '[Activity] Update Activity Success',
   UpdateActivityFailure = '[Activity] Update Activity Failure',
+
   DeleteActivity = '[Activity] Delete Activity',
   DeleteActivitySuccess = '[Activity] Delete Activity Success',
   DeleteActivityFailure = '[Activity] Delete Activity Failure',
-  AllActivitiesRequested = '[Activity] All Activities Requested',
-  AllActivitiesLoaded = '[Activity] All Activities Loaded',
-  AddFailure = '[Activity] Add Failure',
-  AddActivitySuccess = '[Activity] Add Activity Success',
+  
+  
 }
 
 export class LoadActivities implements Action {
   readonly type = ActivityActionTypes.LoadActivities;
+}
+
+export class AllActivitiesRequested implements Action {
+  readonly type = ActivityActionTypes.AllActivitiesRequested;
+}
+
+export class AllActivitiesLoaded implements Action {
+
+  readonly type = ActivityActionTypes.AllActivitiesLoaded;
 
   constructor(public payload: { activities: Activity[] }) {}
 }
@@ -33,6 +47,12 @@ export class AddActivitySuccess implements Action {
   readonly type = ActivityActionTypes.AddActivitySuccess;
 
   constructor(public payload: { activity: Activity }) {}
+}
+
+export class AddActivityFailure implements Action {
+  readonly type = ActivityActionTypes.AddActivityFailure;
+
+  constructor(public payload: { err: any }) {}
 }
 
 export class UpdateActivity implements Action {
@@ -50,7 +70,7 @@ export class UpdateActivitySuccess implements Action {
 export class UpdateActivityFailure implements Action {
   readonly type = ActivityActionTypes.UpdateActivityFailure;
 
-  constructor(public payload: { any }) {}
+  constructor(public payload: { err: any }) {}
 }
 
 export class DeleteActivity implements Action {
@@ -68,25 +88,7 @@ export class DeleteActivitySuccess implements Action {
 export class DeleteActivityFailure implements Action {
   readonly type = ActivityActionTypes.DeleteActivityFailure;
 
-  constructor(public payload: { any }) {}
-}
-
-export class AllActivitiesRequested implements Action {
-
-  readonly type = ActivityActionTypes.AllActivitiesRequested;
-}
-
-export class AllActivitiesLoaded implements Action {
-
-  readonly type = ActivityActionTypes.AllActivitiesLoaded;
-
-  constructor(public payload: { activities: Activity[] }) {}
-}
-
-export class AddFailure implements Action {
-  readonly type = ActivityActionTypes.AddFailure;
-
-  constructor(public payload: any) {}
+  constructor(public payload: { err: any }) {}
 }
 
 
@@ -97,7 +99,7 @@ export type ActivityActions =
  | DeleteActivity
  | AllActivitiesRequested
  | AllActivitiesLoaded
- | AddFailure
+ | AddActivityFailure
  | AddActivitySuccess
  | DeleteActivityFailure
  | DeleteActivitySuccess

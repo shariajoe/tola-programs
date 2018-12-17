@@ -32,14 +32,14 @@ export function activityReducer(
     }
 
     case ActivityActionTypes.LoadActivities: {
-      return adapter.addAll(action.payload.activities, state);
+      return state;
     }
 
     case ActivityActionTypes.AllActivitiesLoaded: {
       return adapter.addAll(action.payload.activities, {...state, allActivitiesLoaded:true});
     }
 
-    case ActivityActionTypes.AddFailure: {
+    case ActivityActionTypes.AddActivityFailure: {
       return state;
     }
 
