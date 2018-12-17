@@ -19,9 +19,11 @@ export function programReducer(
   action: ProgramActions
 ): ProgramState {
   switch (action.type) {
-    
     case ProgramActionTypes.AllProgramsLoaded: {
-      return adapter.addAll(action.payload.programs, {...state, allProgramsLoaded:true});
+      return adapter.addAll(action.payload.programs, {
+        ...state,
+        allProgramsLoaded: true
+      });
     }
 
     default: {
@@ -34,5 +36,5 @@ export const {
   selectIds,
   selectEntities,
   selectAll,
-  selectTotal,
+  selectTotal
 } = adapter.getSelectors();

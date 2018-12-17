@@ -1,10 +1,12 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {activitiesState} from '../reducers/activity.reducer';
-import AppConfig from "../../config";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { activitiesState } from '../reducers/activity.reducer';
+import AppConfig from '../../config';
 
 import * as fromActivity from '../reducers/activity.reducer';
 
-export const selectActivitiesState = createFeatureSelector<activitiesState>("activities");
+export const selectActivitiesState = createFeatureSelector<activitiesState>(
+  'activities'
+);
 
 export const selectAllActivities = createSelector(
   selectActivitiesState,
@@ -16,7 +18,13 @@ export const allActivitiesLoaded = createSelector(
   activityState => activityState.allActivitiesLoaded
 );
 
-export const selectProgramActivities = (activityId:number) => createSelector(
-  selectAllActivities,
-  activities => activities.filter(activity => activity.workflowlevel1 === `${AppConfig.baseUrl}/workflowlevel1/${activityId}/`)
-);
+export const selectProgramActivities = (activityId: number) =>
+  createSelector(
+    selectAllActivities,
+    activities =>
+      activities.filter(
+        activity =>
+          activity.workflowlevel1 ===
+          `${AppConfig.baseUrl}/workflowlevel1/${activityId}/`
+      )
+  );

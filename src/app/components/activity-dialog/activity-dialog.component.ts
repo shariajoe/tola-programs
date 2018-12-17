@@ -1,111 +1,118 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { Activity } from "../../models/activity.model";
-import { State } from "../../store/reducers";
-import { Store } from "@ngrx/store";
-import { Update } from "@ngrx/entity";
+import { Activity } from '../../models/activity.model';
+import { State } from '../../store/reducers';
+import { Store } from '@ngrx/store';
+import { Update } from '@ngrx/entity';
 import { UpdateActivity } from '../../store/actions/activity.actions';
 import { AddActivity } from '../../store/actions/activity.actions';
 import AppConfig from '../../config';
 
 @Component({
-    selector: 'activity-dialog',
-    templateUrl: './activity-dialog.component.html',
-    styleUrls: ['./activity-dialog.component.scss']
+  selector: 'activity-dialog',
+  templateUrl: './activity-dialog.component.html',
+  styleUrls: ['./activity-dialog.component.scss']
 })
 export class ActivityDialogComponent implements OnInit {
+  activityId: number;
+  form: FormGroup;
+  name: string;
+  expected_start_date: string;
+  expected_end_date: string;
+  showAdd = false;
+  startDate = new Date();
+  endDate = new Date();
+  currentActivity: any;
 
-    activityId:number;
-    form: FormGroup;
-    name: string;
-    expected_start_date: string;
-    expected_end_date: string;
-    showAdd: boolean = false;
-    startDate = new Date();
-    endDate = new Date();
-    currentActivity: any;
+  constructor(
+    private store: Store<State>,
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<ActivityDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) activity: Activity
+  ) {
+    this.currentActivity = activity;
+  }
 
-    constructor(
-        private store: Store<State>,
-        private fb: FormBuilder,
-        private dialogRef: MatDialogRef<ActivityDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) activity:Activity ) {
-
-        this.currentActivity = activity;
-    }
-
-    ngOnInit() {
-        /**
-        *   Prefill form if activity is not empty(edit) else display dialog with empty fields(create)
-        */
-        if(this.currentActivity && this.currentActivity.hasOwnProperty('id')){
-            this.activityId = this.currentActivity.id;
-            this.name = this.currentActivity.name;
-            this.expected_start_date = this.currentActivity.expected_start_date;
-            this.expected_end_date = this.currentActivity.expected_end_date;
-            this.startDate = new Date(this.expected_start_date);
-            this.endDate = new Date(this.expected_end_date);
-            this.form = this.fb.group({
-                name: [this.currentActivity.name, Validators.required],
-                expected_start_date: [this.currentActivity.expected_start_date],
-                expected_end_date: [this.currentActivity.expected_end_date]
-            });
-        } else {
-            this.showAdd = true;
-            this.form = this.fb.group({
-                name: ["", Validators.required],
-                expected_start_date: [""],
-                expected_end_date: [""]
-            });
-        }
-    }
-
+  ngOnInit() {
     /**
-    *   Function to edit activity and update store
-    */
-    save() {
-        const formValues = this.form.value;
-        const url = window.location.href;
-        const workflowlevel1 = url.split('/').pop();
-        let changes = {...formValues};
-        changes['expected_start_date'] = moment(formValues.expected_start_date).format();
-        changes['expected_end_date'] = moment(formValues.expected_end_date).format();
-        changes['workflowlevel1'] = `${AppConfig.baseUrl}/workflowlevel1/${workflowlevel1}/`;
-        const activity: Update<Activity> = 
-        {
-          id: this.activityId,
-          changes
-        };   
-        this.store.dispatch(new UpdateActivity({activity}));
-        this.dialogRef.close();
+     *   Prefill form if activity is not empty(edit) else display dialog with empty fields(create)
+     */
+    if (this.currentActivity && this.currentActivity.hasOwnProperty('id')) {
+      this.activityId = this.currentActivity.id;
+      this.name = this.currentActivity.name;
+      this.expected_start_date = this.currentActivity.expected_start_date;
+      this.expected_end_date = this.currentActivity.expected_end_date;
+      this.startDate = new Date(this.expected_start_date);
+      this.endDate = new Date(this.expected_end_date);
+      this.form = this.fb.group({
+        name: [this.currentActivity.name, Validators.required],
+        expected_start_date: [this.currentActivity.expected_start_date],
+        expected_end_date: [this.currentActivity.expected_end_date]
+      });
+    } else {
+      this.showAdd = true;
+      this.form = this.fb.group({
+        name: ['', Validators.required],
+        expected_start_date: [''],
+        expected_end_date: ['']
+      });
     }
+  }
 
-    /**
-    *   Function to create activity and update store
-    */
-    add() {
-        const formValues = this.form.value;
-        const url = window.location.href;
-        const workflowlevel1 = url.split('/').pop();
-        let changes = {...formValues};
+  /**
+   *   Function to edit activity and update store
+   */
+  save() {
+    const formValues = this.form.value;
+    const url = window.location.href;
+    const workflowlevel1 = url.split('/').pop();
+    const changes = { ...formValues };
+    changes['expected_start_date'] = moment(
+      formValues.expected_start_date
+    ).format();
+    changes['expected_end_date'] = moment(
+      formValues.expected_end_date
+    ).format();
+    changes['workflowlevel1'] = `${
+      AppConfig.baseUrl
+    }/workflowlevel1/${workflowlevel1}/`;
+    const activity: Update<Activity> = {
+      id: this.activityId,
+      changes
+    };
+    this.store.dispatch(new UpdateActivity({ activity }));
+    this.dialogRef.close();
+  }
 
-        changes['expected_start_date'] = moment(formValues.expected_start_date).format();
-        changes['expected_end_date'] = moment(formValues.expected_end_date).format();
-        changes['workflowlevel1'] = `${AppConfig.baseUrl}/workflowlevel1/${workflowlevel1}/`;
+  /**
+   *   Function to create activity and update store
+   */
+  add() {
+    const formValues = this.form.value;
+    const url = window.location.href;
+    const workflowlevel1 = url.split('/').pop();
+    const changes = { ...formValues };
 
-        this.store.dispatch(new AddActivity(changes));
-        this.dialogRef.close();
-    }
+    changes['expected_start_date'] = moment(
+      formValues.expected_start_date
+    ).format();
+    changes['expected_end_date'] = moment(
+      formValues.expected_end_date
+    ).format();
+    changes['workflowlevel1'] = `${
+      AppConfig.baseUrl
+    }/workflowlevel1/${workflowlevel1}/`;
 
+    this.store.dispatch(new AddActivity(changes));
+    this.dialogRef.close();
+  }
 
-    /**
-    *   Function to close dialog
-    */
-    close() {
-        this.dialogRef.close();
-    }
-
+  /**
+   *   Function to close dialog
+   */
+  close() {
+    this.dialogRef.close();
+  }
 }
-

@@ -1,35 +1,48 @@
 <h2 mat-dialog-title>Activity</h2>
 
 <mat-dialog-content [formGroup]="form">
-    <mat-form-field>
-        <input matInput
-                placeholder="Activity name"
-               formControlName="name">
-    </mat-form-field>
-    <mat-form-field>
-	  <input matInput [matDatepicker]="picker" placeholder="Set start date" formControlName="expected_start_date">
-	  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-	  <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-	</mat-form-field>
-	<mat-form-field>
-	  <input matInput [matDatepicker]="picker2" placeholder="Set end date" formControlName="expected_end_date">
-	  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-	  <mat-datepicker #picker2 startView="year" [startAt]="endDate"></mat-datepicker>
-	</mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Activity name" formControlName="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      placeholder="Set start date"
+      formControlName="expected_start_date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker
+      #picker
+      startView="year"
+      [startAt]="startDate"
+    ></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="picker2"
+      placeholder="Set end date"
+      formControlName="expected_end_date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker
+      #picker2
+      startView="year"
+      [startAt]="endDate"
+    ></mat-datepicker>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button class="mat-raised-button"
-            (click)="close()">
-        Close
-    </button>
-    <button class="mat-raised-button mat-primary"
-            (click)="save()" *ngIf="!showAdd">
-        Save
-    </button>
-    <button class="mat-raised-button mat-primary"
-            (click)="add()" *ngIf="showAdd">
-        Add
-    </button>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button
+    class="mat-raised-button mat-primary"
+    (click)="save()"
+    *ngIf="!showAdd"
+  >
+    Save
+  </button>
+  <button class="mat-raised-button mat-primary" (click)="add()" *ngIf="showAdd">
+    Add
+  </button>
 </mat-dialog-actions>
-
-

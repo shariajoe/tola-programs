@@ -1,38 +1,36 @@
 .activity-item {
-    font-family: 'Montserrat';   
+  font-family: 'Montserrat';
 }
 
-.activity-item__desc{
-    color: #808080;
-    font-size: 11px;
+.activity-item__desc {
+  color: #808080;
+  font-size: 11px;
 }
 
-.mat-list-base .mat-list-item .mat-line:nth-child(n+2){
-	font-size: 11px;
+.mat-list-base .mat-list-item .mat-line:nth-child(n + 2) {
+  font-size: 11px;
 }
 
 :host /deep/ .mat-list-item-content {
-  padding: 0!important;
+  padding: 0 !important;
 }
 
-.sorry-div{
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	padding-top: 100px;
+.sorry-div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 100px;
 }
 
-.sorry-div__icon{
-	height: 80px; 
-	width: 80px;
-	font-size: 80px;
-	color: #808080;
-	margin: 0 auto;
+.sorry-div__icon {
+  height: 80px;
+  width: 80px;
+  font-size: 80px;
+  color: #808080;
+  margin: 0 auto;
 }
 
-.sorry-div__text{
-	color: #808080;
-	text-align: center;
+.sorry-div__text {
+  color: #808080;
+  text-align: center;
 }
-
-

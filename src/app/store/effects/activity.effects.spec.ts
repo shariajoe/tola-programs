@@ -3,7 +3,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 import { ActivitiesService } from '../../services/activities.service';
 import { ActivityEffects } from './activity.effects';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 
 describe('ActivityEffects', () => {
@@ -12,10 +12,7 @@ describe('ActivityEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[ 
-        HttpClientModule,
-        StoreModule.forRoot({})
-      ],
+      imports: [HttpClientModule, StoreModule.forRoot({})],
       providers: [
         ActivityEffects,
         ActivitiesService,

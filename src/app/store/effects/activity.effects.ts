@@ -1,80 +1,94 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as fromActions from '../actions/activity.actions';
-import { catchError, filter, map, mergeMap, withLatestFrom, switchMap } from "rxjs/operators";
+import {
+  catchError,
+  filter,
+  map,
+  mergeMap,
+  withLatestFrom,
+  switchMap
+} from 'rxjs/operators';
 import { ActivitiesService } from '../../services/activities.service';
 import { State } from '../reducers';
 import { select, Store } from '@ngrx/store';
 import { allActivitiesLoaded } from '../selectors/activity.selectors';
-import { Observable, of } from "rxjs";
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class ActivityEffects {
-
   @Effect()
-  loadAllActivities$ = this.actions$
-  .pipe(
-    ofType<fromActions.AllActivitiesRequested>(fromActions.ActivityActionTypes.AllActivitiesRequested),
+  loadAllActivities$ = this.actions$.pipe(
+    ofType<fromActions.AllActivitiesRequested>(
+      fromActions.ActivityActionTypes.AllActivitiesRequested
+    ),
     withLatestFrom(this.store.pipe(select(allActivitiesLoaded))),
     filter(([action, allActivitiesLoaded]) => !allActivitiesLoaded),
     mergeMap(() => this.activitiesService.findAllActivities()),
-    map(activities => new fromActions.AllActivitiesLoaded({activities}))
+    map(activities => new fromActions.AllActivitiesLoaded({ activities }))
   );
 
-  @Effect() 
+  @Effect()
   createActivity$ = this.actions$
-    .ofType<fromActions.AddActivity>(fromActions.ActivityActionTypes.AddActivity)
+    .ofType<fromActions.AddActivity>(
+      fromActions.ActivityActionTypes.AddActivity
+    )
     .pipe(
-    switchMap((action: any) => {
-      return this.activitiesService.addActivity(action.payload)
-        .pipe(
+      switchMap((action: any) => {
+        return this.activitiesService.addActivity(action.payload).pipe(
           map(
             (activity: any) =>
-              new fromActions.AddActivitySuccess({ activity: activity }),
+              new fromActions.AddActivitySuccess({ activity: activity })
           ),
-          catchError(err =>
-            of(new fromActions.AddActivityFailure({ err })),
-          ),
+          catchError(err => of(new fromActions.AddActivityFailure({ err })))
         );
-    }),
-  );
+      })
+    );
 
-  @Effect() 
+  @Effect()
   updateActivity$ = this.actions$
-    .ofType<fromActions.UpdateActivity>(fromActions.ActivityActionTypes.UpdateActivity)
+    .ofType<fromActions.UpdateActivity>(
+      fromActions.ActivityActionTypes.UpdateActivity
+    )
     .pipe(
-    switchMap((action: any) => {
-      return this.activitiesService.saveActivity(action.payload.activity.id, action.payload.activity.changes)
-        .pipe(
-          map(
-            (activity: any) =>
-              new fromActions.UpdateActivitySuccess({ activity: activity }),
-          ),
-          catchError(err =>
-            of(new fromActions.UpdateActivityFailure({ err })),
-          ),
-        );
-    }),
-  );
+      switchMap((action: any) => {
+        return this.activitiesService
+          .saveActivity(
+            action.payload.activity.id,
+            action.payload.activity.changes
+          )
+          .pipe(
+            map(
+              (activity: any) =>
+                new fromActions.UpdateActivitySuccess({ activity: activity })
+            ),
+            catchError(err =>
+              of(new fromActions.UpdateActivityFailure({ err }))
+            )
+          );
+      })
+    );
 
-  @Effect() 
+  @Effect()
   deleteActivity$ = this.actions$
-    .ofType<fromActions.DeleteActivity>(fromActions.ActivityActionTypes.DeleteActivity)
+    .ofType<fromActions.DeleteActivity>(
+      fromActions.ActivityActionTypes.DeleteActivity
+    )
     .pipe(
-    switchMap((action: any) => {
-      return this.activitiesService.deleteActivity(action.payload.id)
-        .pipe(
+      switchMap((action: any) => {
+        return this.activitiesService.deleteActivity(action.payload.id).pipe(
           map(
             (resp: any) =>
-              new fromActions.DeleteActivitySuccess({id:action.payload.id})
+              new fromActions.DeleteActivitySuccess({ id: action.payload.id })
           ),
-          catchError(err =>
-            of(new fromActions.DeleteActivityFailure({ err })),
-          ),
+          catchError(err => of(new fromActions.DeleteActivityFailure({ err })))
         );
-    }),
-  );
+      })
+    );
 
-  constructor(private actions$ :Actions, private activitiesService: ActivitiesService,
-              private store: Store<State>) {}
+  constructor(
+    private actions$: Actions,
+    private activitiesService: ActivitiesService,
+    private store: Store<State>
+  ) {}
 }

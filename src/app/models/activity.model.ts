@@ -1,10 +1,9 @@
-export interface Activity
-{ 
+export interface Activity {
   url?: string;
   id?: number;
   products?: any[];
   contact?: any;
-  site_uuid: any[],
+  site_uuid: any[];
   actual_start_date?: any;
   actual_end_date?: any;
   actual_duration?: any;

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatInputModule, MatDialogModule,
-  MatIconModule } from "@angular/material";
+import {
+  MatInputModule,
+  MatDialogModule,
+  MatIconModule
+} from '@angular/material';
 import { MatListModule } from '@angular/material/list';
 import { StoreModule } from '@ngrx/store';
 import { HomeComponent } from './home.component';
@@ -12,17 +15,16 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [HomeComponent],
       imports: [
         MatListModule,
         MatIconModule,
-        MatDialogModule, 
+        MatDialogModule,
         MatInputModule,
         StoreModule.forRoot({})
       ],
       schemas: [NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,4 +37,3 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

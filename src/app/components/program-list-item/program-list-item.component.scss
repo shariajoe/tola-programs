@@ -1,32 +1,31 @@
 .program-item {
-    font-family: 'Montserrat'; 
+  font-family: 'Montserrat';
 }
 
-.program-item__desc{
-    color: #808080;
+.program-item__desc {
+  color: #808080;
 }
 
 :host /deep/ .mat-list-item-content {
-  padding: 0!important;
+  padding: 0 !important;
 }
 
-.mat-list-base .mat-list-item .mat-line:nth-child(n+2){
-	font-size: 11px;
+.mat-list-base .mat-list-item .mat-line:nth-child(n + 2) {
+  font-size: 11px;
 }
 
-.program-item__status{
-   display: flex; 
-   align-items: center;
-   flex-direction: column
+.program-item__status {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.program-item__status__indicator{
-	height: 15px; 
-	width: 15px;
-	border-radius: 50%;
+.program-item__status__indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
 }
 
-.program-item__status__text{
-    font-size: 11px;
+.program-item__status__text {
+  font-size: 11px;
 }
-

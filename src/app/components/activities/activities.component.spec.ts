@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule, MatDialogModule } from "@angular/material";
+import { MatIconModule, MatDialogModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { ActivitiesComponent } from './activities.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -15,18 +15,15 @@ describe('ActivitiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-        ActivitiesComponent
-      ],
-      imports: [ 
+      declarations: [ActivitiesComponent],
+      imports: [
         MatIconModule,
         MatDialogModule,
         StoreModule.forRoot({}),
         RouterModule.forRoot(routes)
       ],
       schemas: [NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

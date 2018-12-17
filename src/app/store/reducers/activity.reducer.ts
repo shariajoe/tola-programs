@@ -1,6 +1,9 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Activity } from '../../models/activity.model';
-import { ActivityActions, ActivityActionTypes } from '../actions/activity.actions';
+import {
+  ActivityActions,
+  ActivityActionTypes
+} from '../actions/activity.actions';
 
 export interface activitiesState extends EntityState<Activity> {
   // additional entities state properties
@@ -36,7 +39,10 @@ export function activityReducer(
     }
 
     case ActivityActionTypes.AllActivitiesLoaded: {
-      return adapter.addAll(action.payload.activities, {...state, allActivitiesLoaded:true});
+      return adapter.addAll(action.payload.activities, {
+        ...state,
+        allActivitiesLoaded: true
+      });
     }
 
     case ActivityActionTypes.AddActivityFailure: {
@@ -57,5 +63,5 @@ export const {
   selectIds,
   selectEntities,
   selectAll,
-  selectTotal,
+  selectTotal
 } = adapter.getSelectors();

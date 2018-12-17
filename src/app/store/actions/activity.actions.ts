@@ -17,9 +17,7 @@ export enum ActivityActionTypes {
 
   DeleteActivity = '[Activity] Delete Activity',
   DeleteActivitySuccess = '[Activity] Delete Activity Success',
-  DeleteActivityFailure = '[Activity] Delete Activity Failure',
-  
-  
+  DeleteActivityFailure = '[Activity] Delete Activity Failure'
 }
 
 export class LoadActivities implements Action {
@@ -31,7 +29,6 @@ export class AllActivitiesRequested implements Action {
 }
 
 export class AllActivitiesLoaded implements Action {
-
   readonly type = ActivityActionTypes.AllActivitiesLoaded;
 
   constructor(public payload: { activities: Activity[] }) {}
@@ -91,17 +88,16 @@ export class DeleteActivityFailure implements Action {
   constructor(public payload: { err: any }) {}
 }
 
-
 export type ActivityActions =
- LoadActivities
- | AddActivity
- | UpdateActivity
- | DeleteActivity
- | AllActivitiesRequested
- | AllActivitiesLoaded
- | AddActivityFailure
- | AddActivitySuccess
- | DeleteActivityFailure
- | DeleteActivitySuccess
- | UpdateActivitySuccess
- | UpdateActivityFailure;
+  | LoadActivities
+  | AddActivity
+  | UpdateActivity
+  | DeleteActivity
+  | AllActivitiesRequested
+  | AllActivitiesLoaded
+  | AddActivityFailure
+  | AddActivitySuccess
+  | DeleteActivityFailure
+  | DeleteActivitySuccess
+  | UpdateActivitySuccess
+  | UpdateActivityFailure;
