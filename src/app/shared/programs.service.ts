@@ -23,7 +23,7 @@ export class ProgramsService {
       })
       .pipe(
         map(res => {
-          return <Program[]>res;
+          return res;
         })
       );
   }
