@@ -1,5 +1,5 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Program } from '../../models/program.model';
+import { Program } from '../models/program.model';
 import { ProgramActions, ProgramActionTypes } from '../actions/program.actions';
 
 export interface ProgramState extends EntityState<Program> {

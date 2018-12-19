@@ -9,8 +9,8 @@ import {
   withLatestFrom,
   switchMap
 } from 'rxjs/operators';
-import { ActivitiesService } from '../../services/activities.service';
-import { State } from '../reducers';
+import { ActivitiesService } from '../../../shared/activities.service';
+import { State } from '../../../reducers';
 import { select, Store } from '@ngrx/store';
 import { allActivitiesLoaded } from '../selectors/activity.selectors';
 import { Observable, of } from 'rxjs';

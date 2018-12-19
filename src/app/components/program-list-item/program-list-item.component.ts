@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Program } from '../../models/program.model';
+import { Program } from '../../entities/program/models/program.model';
 
 @Component({
   selector: 'program-list-item',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Activity } from '../models/activity.model';
+import { Activity } from '../entities/activity/models/activity.model';
 import { map } from 'rxjs/operators';
 import AppConfig from '../config';
 

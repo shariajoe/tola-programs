@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
-import { Program } from '../../models/program.model';
+import { Program } from '../models/program.model';
 
 export enum ProgramActionTypes {
   AllProgramsRequested = '[Program] All Programs Requested',

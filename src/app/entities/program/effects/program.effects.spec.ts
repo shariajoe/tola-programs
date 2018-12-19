@@ -1,26 +1,26 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
-import { ActivitiesService } from '../../services/activities.service';
-import { ActivityEffects } from './activity.effects';
+import { ProgramsService } from '../../../shared/programs.service';
+import { ProgramEffects } from './program.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 
-describe('ActivityEffects', () => {
+describe('ProgramEffects', () => {
   let actions$: Observable<any>;
-  let effects: ActivityEffects;
+  let effects: ProgramEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, StoreModule.forRoot({})],
       providers: [
-        ActivityEffects,
-        ActivitiesService,
+        ProgramEffects,
+        ProgramsService,
         provideMockActions(() => actions$)
       ]
     });
 
-    effects = TestBed.get(ActivityEffects);
+    effects = TestBed.get(ProgramEffects);
   });
 
   it('should be created', () => {

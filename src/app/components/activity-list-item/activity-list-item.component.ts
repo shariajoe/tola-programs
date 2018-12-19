@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { Activity } from '../../models/activity.model';
+import { Activity } from '../../entities/activity/models/activity.model';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivityDialogComponent } from '../activity-dialog/activity-dialog.component';
-import { State } from '../../store/reducers';
+import { State } from '../../reducers';
 import { Store } from '@ngrx/store';
-import { DeleteActivity } from '../../store/actions/activity.actions';
+import { DeleteActivity } from '../../entities/activity/actions/activity.actions';
 
 @Component({
   selector: 'activity-list-item',

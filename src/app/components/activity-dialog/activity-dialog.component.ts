@@ -2,12 +2,12 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { Activity } from '../../models/activity.model';
-import { State } from '../../store/reducers';
+import { Activity } from '../../entities/activity/models/activity.model';
+import { State } from '../../reducers';
 import { Store } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { UpdateActivity } from '../../store/actions/activity.actions';
-import { AddActivity } from '../../store/actions/activity.actions';
+import { UpdateActivity } from '../../entities/activity/actions/activity.actions';
+import { AddActivity } from '../../entities/activity/actions/activity.actions';
 import AppConfig from '../../config';
 
 @Component({

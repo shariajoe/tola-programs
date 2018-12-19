@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { activitiesState } from '../reducers/activity.reducer';
-import AppConfig from '../../config';
+import AppConfig from '../../../config';
 
 import * as fromActivity from '../reducers/activity.reducer';
 

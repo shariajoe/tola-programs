@@ -7,7 +7,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
 import {
   MatInputModule,
   MatDatepickerModule,
@@ -24,19 +23,14 @@ import {
 import { MatListModule } from '@angular/material/list';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, metaReducers } from './store/reducers';
-import {
-  RouterStateSerializer,
-  StoreRouterConnectingModule
-} from '@ngrx/router-store';
+import { reducers, metaReducers } from './reducers';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HomeComponent } from './components/home/home.component';
 import { ProgramListItemComponent } from './components/program-list-item/program-list-item.component';
-import { ProgramsEffects } from './store/effects/programs.effects';
-import { programReducer } from './store/reducers/program.reducer';
-import { ProgramsService } from './services/programs.service';
-import { ActivitiesService } from './services/activities.service';
+import { effects } from './app.effects';
+import { ProgramsService } from './shared/programs.service';
+import { ActivitiesService } from './shared/activities.service';
 import { ActivitiesComponent } from './components/activities/activities.component';
-import { ActivityEffects } from './store/effects/activity.effects';
 import { ActivityListItemComponent } from './components/activity-list-item/activity-list-item.component';
 import { ActivityDialogComponent } from './components/activity-dialog/activity-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -84,7 +78,7 @@ const MY_DATE_FORMATS = {
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([ProgramsEffects, ActivityEffects]),
+    EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production

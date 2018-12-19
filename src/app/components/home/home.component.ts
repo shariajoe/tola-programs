@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Program } from '../../models/program.model';
+import { Program } from '../../entities/program/models/program.model';
 import { Observable } from 'rxjs';
-import { State } from '../../store/reducers/';
+import { State } from '../../reducers/';
 import { select, Store } from '@ngrx/store';
-import { selectAllPrograms } from '../../store/selectors/program.selectors';
-import { AllProgramsRequested } from '../../store/actions/program.actions';
+import { selectAllPrograms } from '../../entities/program/selectors/program.selectors';
+import { AllProgramsRequested } from '../../entities/program/actions/program.actions';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     // Get all programs from store
     this.store.dispatch(new AllProgramsRequested());
+    
     this.allPrograms$ = this.store.pipe(select(selectAllPrograms));
   }
 }

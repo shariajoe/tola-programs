@@ -1,8 +1,7 @@
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { environment } from '../../../environments/environment';
-import { routerReducer } from '@ngrx/router-store';
-import { programReducer, ProgramState } from './program.reducer';
-import { activityReducer, activitiesState } from './activity.reducer';
+import { environment } from '../../environments/environment';
+import { programReducer, ProgramState } from '../entities/program/reducers/program.reducer';
+import { activityReducer, activitiesState } from '../entities/activity/reducers/activity.reducer';
 
 export interface State {
   programs: ProgramState;

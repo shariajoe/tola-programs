@@ -8,13 +8,13 @@ import {
   mergeMap,
   withLatestFrom
 } from 'rxjs/operators';
-import { ProgramsService } from '../../services/programs.service';
-import { State } from '../reducers';
+import { ProgramsService } from '../../../shared/programs.service';
+import { State } from '../../../reducers';
 import { select, Store } from '@ngrx/store';
 import { allProgramsLoaded } from '../selectors/program.selectors';
 
 @Injectable()
-export class ProgramsEffects {
+export class ProgramEffects {
   @Effect()
   loadAllPrograms$ = this.actions$.pipe(
     ofType<fromActions.AllProgramsRequested>(
