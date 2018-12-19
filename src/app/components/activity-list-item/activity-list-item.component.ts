@@ -51,7 +51,7 @@ export class ActivityListItemComponent implements OnInit {
    *   Function to delete activity
    */
   deleteActivity(activity: Activity) {
-    const activityId = '' + activity.id;
+    const activityId = activity.id;
     this.store.dispatch(new DeleteActivity({ id: activityId }));
   }
 }

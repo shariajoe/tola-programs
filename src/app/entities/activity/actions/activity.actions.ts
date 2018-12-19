@@ -3,7 +3,6 @@ import { Update } from '@ngrx/entity';
 import { Activity } from '../models/activity.model';
 
 export enum ActivityActionTypes {
-  LoadActivities = '[Activity] Load Activities',
   AllActivitiesRequested = '[Activity] All Activities Requested',
   AllActivitiesLoaded = '[Activity] All Activities Loaded',
 
@@ -18,10 +17,6 @@ export enum ActivityActionTypes {
   DeleteActivity = '[Activity] Delete Activity',
   DeleteActivitySuccess = '[Activity] Delete Activity Success',
   DeleteActivityFailure = '[Activity] Delete Activity Failure'
-}
-
-export class LoadActivities implements Action {
-  readonly type = ActivityActionTypes.LoadActivities;
 }
 
 export class AllActivitiesRequested implements Action {
@@ -73,13 +68,13 @@ export class UpdateActivityFailure implements Action {
 export class DeleteActivity implements Action {
   readonly type = ActivityActionTypes.DeleteActivity;
 
-  constructor(public payload: { id: string }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class DeleteActivitySuccess implements Action {
   readonly type = ActivityActionTypes.DeleteActivitySuccess;
 
-  constructor(public payload: { id: string }) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class DeleteActivityFailure implements Action {
@@ -89,7 +84,6 @@ export class DeleteActivityFailure implements Action {
 }
 
 export type ActivityActions =
-  | LoadActivities
   | AddActivity
   | UpdateActivity
   | DeleteActivity

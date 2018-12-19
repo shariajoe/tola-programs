@@ -59,8 +59,10 @@ export class ActivityEffects {
           )
           .pipe(
             map(
-              (activity: any) =>
-                new fromActions.UpdateActivitySuccess({ activity: activity })
+              _ =>
+                new fromActions.UpdateActivitySuccess({
+                  activity: action.payload.activity
+                })
             ),
             catchError(err =>
               of(new fromActions.UpdateActivityFailure({ err }))
@@ -78,7 +80,7 @@ export class ActivityEffects {
       switchMap((action: any) => {
         return this.activitiesService.deleteActivity(action.payload.id).pipe(
           map(
-            (resp: any) =>
+            _ =>
               new fromActions.DeleteActivitySuccess({ id: action.payload.id })
           ),
           catchError(err => of(new fromActions.DeleteActivityFailure({ err })))

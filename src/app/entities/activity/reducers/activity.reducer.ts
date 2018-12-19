@@ -26,15 +26,31 @@ export function activityReducer(
       return adapter.addOne(action.payload.activity, state);
     }
 
+    case ActivityActionTypes.AddActivityFailure: {
+      return state;
+    }
+
     case ActivityActionTypes.UpdateActivity: {
+      return state;
+    }
+
+    case ActivityActionTypes.UpdateActivitySuccess: {
       return adapter.updateOne(action.payload.activity, state);
+    }
+
+    case ActivityActionTypes.UpdateActivityFailure: {
+      return state;
     }
 
     case ActivityActionTypes.DeleteActivitySuccess: {
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case ActivityActionTypes.LoadActivities: {
+    case ActivityActionTypes.DeleteActivityFailure: {
+      return state;
+    }
+
+    case ActivityActionTypes.AllActivitiesRequested: {
       return state;
     }
 
@@ -45,14 +61,7 @@ export function activityReducer(
       });
     }
 
-    case ActivityActionTypes.AddActivityFailure: {
-      return state;
-    }
-
-    case ActivityActionTypes.DeleteActivityFailure: {
-      return state;
-    }
-
+    
     default: {
       return state;
     }
